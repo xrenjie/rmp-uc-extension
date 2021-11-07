@@ -10,14 +10,11 @@ var observer = new MutationObserver(function (mutations) {
 
           if (instructors.length > 0) {
             instructors.forEach((element) => {
-              console.log(element);
               let names = element.innerHTML.split(";");
               element.innerHTML = "";
-              console.log(names);
               names.forEach((name) => {
                 name = name.trim();
                 let fullname = name.split(" ");
-                console.log(fullname);
                 if (fullname.length > 1) {
                   let firstName = fullname[0];
                   let lastName = fullname[fullname.length - 1];
