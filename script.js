@@ -10,20 +10,23 @@ var observer = new MutationObserver(function (mutations) {
 
           if (instructors.length > 0) {
             instructors.forEach((element) => {
-              let name = element.innerHTML.split(" ");
-              if (name.length > 1) {
-                let firstName = name[0];
-                let lastName = name[name.length - 1];
-
-                element.innerHTML =
-                  '<a href="https://www.ratemyprofessors.com/search/teachers?query=' +
-                  firstName +
-                  "%20" +
-                  lastName +
-                  '" target="_blank">' +
-                  element.innerHTML +
-                  "</a>";
-              }
+              console.log(element);
+              let names = element.innerHTML.split(";");
+              element.innerHTML = "";
+              console.log(names);
+              names.forEach((name) => {
+                name = name.trim();
+                let fullname = name.split(" ");
+                console.log(fullname);
+                if (fullname.length > 1) {
+                  let firstName = fullname[0];
+                  let lastName = fullname[fullname.length - 1];
+                  let newHTML = getLink(firstName, lastName, name);
+                  element.innerHTML += newHTML + "; ";
+                } else {
+                  element.innerHTML = "Staff";
+                }
+              });
             });
           }
         }
@@ -37,3 +40,15 @@ observer.observe(document, {
   childList: true,
   subtree: true,
 });
+
+function getLink(firstName, lastName, fullName) {
+  return (
+    '<a href="https://www.ratemyprofessors.com/search/teachers?query=' +
+    firstName +
+    "%20" +
+    lastName +
+    '" target="_blank">' +
+    fullName +
+    "</a>"
+  );
+}
