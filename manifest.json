@@ -1,7 +1,7 @@
 {
   "name": "UCalgary RateMyProfessor",
   "description": "Get RateMyProfessor results in UCalgary course search.",
-  "version": "0.1",
+  "version": "0.2",
   "manifest_version": 3,
 	"content_scripts": [{
 		"matches": ["https://vsb.my.ucalgary.ca/*", "http://vsb.my.ucalgary.ca/*"],

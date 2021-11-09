@@ -10,20 +10,23 @@ var observer = new MutationObserver(function (mutations) {
 
           if (instructors.length > 0) {
             instructors.forEach((element) => {
-              let names = element.innerHTML.split(";");
-              element.innerHTML = "";
-              names.forEach((name) => {
-                name = name.trim();
-                let fullname = name.split(" ");
-                if (fullname.length > 1) {
-                  let firstName = fullname[0];
-                  let lastName = fullname[fullname.length - 1];
-                  let newHTML = getLink(firstName, lastName, name);
-                  element.innerHTML += newHTML + "; ";
-                } else {
-                  element.innerHTML = "Staff";
-                }
-              });
+              if (!element.innerHTML.includes("<a")) {
+                let names = element.innerHTML.split(";");
+                element.innerHTML = "";
+
+                names.forEach((name) => {
+                  name = name.trim();
+                  let fullname = name.split(" ");
+                  if (fullname.length > 1) {
+                    let firstName = fullname[0];
+                    let lastName = fullname[fullname.length - 1];
+                    let newHTML = getLink(firstName, lastName, name);
+                    element.innerHTML += newHTML + "; ";
+                  } else {
+                    element.innerHTML = "Staff";
+                  }
+                });
+              }
             });
           }
         }
